@@ -1,0 +1,58 @@
+﻿@model Building_VehiclePark.Models.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InGarage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InGarage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InRepair)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InRepair)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsWork)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VehicleId }) |
+    @Html.ActionLink("Back to List", "AllVihecles")
+</p>
