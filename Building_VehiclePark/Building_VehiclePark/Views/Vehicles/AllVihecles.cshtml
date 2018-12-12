@@ -59,9 +59,19 @@
             @Html.DisplayFor(modelItem => item.IsWork)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", item) |
+            @{string edit = "Autorize", del = "Autorize"; }
+            @if (Request.Cookies["Role"] != null)
+            {
+                if (Request.Cookies["Role"].Value == "Moder")
+                {
+                    edit = "Edit";
+                    del = "Delete";
+                    Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+                }
+            }
+            @Html.ActionLink("Edit", edit, item) |
             @Html.ActionLink("Details", "Details", item) |
-            @Html.ActionLink("Delete", "Delete", item)
+            @Html.ActionLink("Delete", del, item)
         </td>
     </tr>
             index++;

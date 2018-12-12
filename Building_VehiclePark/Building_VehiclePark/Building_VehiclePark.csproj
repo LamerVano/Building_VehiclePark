@@ -138,6 +138,7 @@
     <Content Include="Views\Vehicles\Delete.cshtml" />
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Create.cshtml" />
+    <Content Include="Views\Vehicles\Autorize.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

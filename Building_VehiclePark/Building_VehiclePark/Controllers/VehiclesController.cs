@@ -91,5 +91,29 @@ namespace Building_VehiclePark.Controllers
             }
             return false;
         }
+
+        [HttpGet]
+        public ActionResult Autorize()
+        {            
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Autorize(string login, string password)
+        {
+            if(login == "Moderator" & password == "gfhjkm")
+            {
+                HttpCookie cookie = new HttpCookie("Role", "Moder");
+                cookie.Expires = DateTime.Now.AddMinutes(10);
+
+                Response.Cookies.Add(cookie);
+
+                return RedirectToAction("AllVihecles");
+            }
+
+            ViewBag.Message = "Not correct Login or Password";
+
+            return View();
+        }
     }
 }
