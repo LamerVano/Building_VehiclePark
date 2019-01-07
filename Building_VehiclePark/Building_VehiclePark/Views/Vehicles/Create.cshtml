@@ -3,14 +3,22 @@
 @{
     ViewBag.Title = "Create";
 }
-
+@{bool isHiden = true;}
+@if (Request.Cookies["Role"] != null)
+{
+    if (Request.Cookies["Role"].Value == "Moder")
+    {
+        isHiden = false;
+        Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+    }
+}
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Vehicle</h4>
         <hr />
@@ -27,7 +35,7 @@
             @Html.LabelFor(model => model.TypeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TypeId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TypeId, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -63,7 +71,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @if (!isHiden)
+                {
+                    <input type="submit" value="Create" class="btn btn-default" />
+                }
                 @ViewBag.Message
             </div>
         </div>

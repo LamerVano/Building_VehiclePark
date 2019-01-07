@@ -4,13 +4,22 @@
     ViewBag.Title = "Edit";
 }
 
+@{bool isHiden = true;}
+@if (Request.Cookies["Role"] != null)
+{
+    if (Request.Cookies["Role"].Value == "Moder")
+    {
+        isHiden = false;
+        Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+    }
+}
 <h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Vehicle</h4>
         <hr />
@@ -64,9 +73,12 @@
         </div>
 
         <div class="form-group">
-            
+
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" name="save" class="btn btn-default" />
+                @if (!isHiden)
+                {
+                   <input type="submit" value="Save" name="save" class="btn btn-default" />
+                }
                 @ViewBag.Message
             </div>
         </div>

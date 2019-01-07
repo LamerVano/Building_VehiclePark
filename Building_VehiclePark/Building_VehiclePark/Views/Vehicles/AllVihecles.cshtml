@@ -4,21 +4,31 @@
     ViewBag.Title = "AllVihecles";
 }
 
-<h2>AllVihecles</h2>
+<h2>AllVehicles</h2>
+
+@{bool isHiden = true;}
+@if (Request.Cookies["Role"] != null)
+{
+    if (Request.Cookies["Role"].Value == "Moder")
+    {
+        isHiden = false;
+        Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+    }
+}
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (!isHiden)
+    {
+        @Html.ActionLink("Create New", "Create");
+    }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.VehicleId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeId)
+            Type
         </th>
         <th>
             @Html.DisplayNameFor(model => model.InGarage)
@@ -32,51 +42,84 @@
         <th></th>
     </tr>
 
-@{
-    if(Model != null)
-    {
-        int index = 0;
-        foreach (var item in Model)
+    @{
+        if (Model != null)
         {
-
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InGarage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InRepair)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsWork)
-        </td>
-        <td>
-            @{string edit = "Autorize", del = "Autorize"; }
-            @if (Request.Cookies["Role"] != null)
+            if (Model.Count() != 0)
             {
-                if (Request.Cookies["Role"].Value == "Moder")
+                int index = 0;
+                foreach (var item in Model)
                 {
-                    edit = "Edit";
-                    del = "Delete";
-                    Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+                @Html.HiddenFor(modelItem => item.VehicleId)
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InGarage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InRepair)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsWork)
+                    </td>
+                    <td>
+                        @if (!isHiden)
+                        {
+                            @Html.ActionLink("Edit", "Edit", item);
+                        } |
+                        @Html.ActionLink("Details", "Details", item) |
+                        @if (!isHiden)
+                        {
+                            @Html.ActionLink("Delete", "Delete", item);
+                        }
+                    </td>
+                </tr>
+                        index++;
+                    }
                 }
             }
-            @Html.ActionLink("Edit", edit, item) |
-            @Html.ActionLink("Details", "Details", item) |
-            @Html.ActionLink("Delete", del, item)
-        </td>
-    </tr>
-            index++;
         }
-    }
-    }
 
 </table>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Filter</h4>
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="text" name="filter" />
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="btn btn-default" type="submit" value="Filt by Type" name="filtType" />
+                </div>
+                <div class="col-md-2">
+                    <input class="btn btn-default" type="submit" value="Filt by Name" name="filtType" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <input class="checkbox" type="checkbox" value="Include InGarage" name="isInGarage" checked />
+                </div>
+                <div class="col-md-1">
+                    <input class="checkbox" type="checkbox" value="Include InRepair" name="isInRepair" checked />
+                </div>
+                <div class="col-md-1">
+                    <input class="checkbox" type="checkbox" value="Include IsWork" name="isIsWork" checked />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}

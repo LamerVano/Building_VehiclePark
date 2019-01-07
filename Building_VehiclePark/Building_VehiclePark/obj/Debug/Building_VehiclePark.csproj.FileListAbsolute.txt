@@ -24,3 +24,5 @@ D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\bin\
 D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\bin\EntityFramework.SqlServer.dll
 D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\bin\EntityFramework.xml
 D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\bin\EntityFramework.SqlServer.xml
+D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\obj\Debug\Building_VehiclePark.Migrations.InitialCreate.resources
+D:\Vano1\Git\Building_VehiclePark\Building_VehiclePark\Building_VehiclePark\obj\Debug\Building_VehiclePark.csproj.GenerateResource.Cache

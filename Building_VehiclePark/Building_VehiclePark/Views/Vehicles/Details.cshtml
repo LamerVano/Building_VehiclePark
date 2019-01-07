@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@{bool isHiden = true;}
+@if (Request.Cookies["Role"] != null)
+{
+    if (Request.Cookies["Role"].Value == "Moder")
+    {
+        isHiden = false;
+        Request.Cookies["Role"].Expires = DateTime.Now.AddMinutes(10);
+    }
+}
 <h2>Details</h2>
 
 <div>
@@ -53,6 +61,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VehicleId }) |
+    @if (!isHiden) {
+       @Html.ActionLink("Edit", "Edit", new { id = Model.VehicleId }) 
+    }|
     @Html.ActionLink("Back to List", "AllVihecles")
 </p>

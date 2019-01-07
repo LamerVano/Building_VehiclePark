@@ -3,21 +3,34 @@
     ViewBag.Title = "Autorize";
 }
 
+<h2>Autorize</h2>
+
 @using (Html.BeginForm())
 {
-    <div>
-        Login
-        <input type="text" name="Login" />
+<div class="form-horizontal">
+    <h4>Log In</h4>
+    <div class="form-group">
+        <label class="control-label col-md-2">Login</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" name="Login" />
+        </div>
     </div>
-    <div>
-        Password 
-        <input type="password" name="password" />
-    </div>
-    <div>
-        <input type="submit" value="Log In" />
-    </div>
-}
-@ViewBag.Message
 
-<h2>Autorize</h2>
+    <div class="form-group">
+        <label class="control-label col-md-2">Password</label>
+        <div class="col-md-10">
+            <input class="form-control" type="password" name="password" />
+        </div>
+    </div>
+
+    <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input class="btn btn-default" type="submit" value="Log In" />
+        @ViewBag.Message
+    </div>
+    </div>
+
+    
+</div>
+}
 
